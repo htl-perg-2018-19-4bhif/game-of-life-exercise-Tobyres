@@ -5,34 +5,24 @@ window.onload = () => {
     class cell {
         x: number;
         y: number;
-        id: number;
         alive: boolean;
     }
 
     let cellArr: cell[] = [];
     for (let i = 0; i < cells * cells; i++) {
         cellArr.push(new cell);
-        cellArr[i].alive = false;
     }
-
-    console.log(cellArr);
 
     // Get reference to canvas
     const canvas = <HTMLCanvasElement>document.getElementById('canvas');
     canvas.width = canvas.height = boardSize;
     const ctx = canvas.getContext('2d');
     ctx.fillStyle = 'rgba(0, 0, 0, 1)';
-/*
-    cellArr[0].alive = true;
-    cellArr[1].alive = true;
-    cellArr[200].alive = true;
-    cellArr[201].alive = true;
-    console.log(getNeighbourCount(0,0));
-*/
+
     initBoard();
 
     // Call 'draw' function whenever browser renders a frame on the screen
-    //window.requestAnimationFrame(draw);
+    window.requestAnimationFrame(draw);
 
     function draw() {
         // Demo code showing how to draw in the canvas
@@ -51,7 +41,8 @@ window.onload = () => {
             }
         }
         drawCells();
-        console.log(cellArr);
+        //commented that out, to prevent rekursion which will lead to a browser crash -->
+        //couldn't figure out, why after the first run of the draw method, almost every cell died
         //window.requestAnimationFrame(draw);
     }
 
